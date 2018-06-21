@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -53,33 +54,18 @@ public class BackupRestoreFragment extends Fragment {
     private static final int REQUEST_CODE_INPUT = 0x00007003;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.backup_restore_fragment, container, false);
 
         View backupAll = view.findViewById(R.id.backup_all);
         View backupPublicKeys = view.findViewById(R.id.backup_public_keys);
         final View restore = view.findViewById(R.id.restore);
 
-        backupAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                exportToFile(true);
-            }
-        });
+        backupAll.setOnClickListener(v -> exportToFile(true));
 
-        backupPublicKeys.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                exportToFile(false);
-            }
-        });
+        backupPublicKeys.setOnClickListener(v -> exportToFile(false));
 
-        restore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                restore();
-            }
-        });
+        restore.setOnClickListener(v -> restore());
 
         return view;
     }

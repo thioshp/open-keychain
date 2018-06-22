@@ -115,7 +115,7 @@ public abstract class BaseOperation<T extends Parcelable> implements PassphraseC
     public Passphrase getCachedPassphrase(long subKeyId) throws NoSecretKeyException {
         try {
             if (subKeyId != key.symmetric) {
-                long masterKeyId = mKeyRepository.getMasterKeyId(subKeyId);
+                long masterKeyId = mKeyRepository.getMasterKeyIdBySubKeyId(subKeyId);
                 return getCachedPassphrase(masterKeyId, subKeyId);
             }
             return getCachedPassphrase(key.symmetric, key.symmetric);
